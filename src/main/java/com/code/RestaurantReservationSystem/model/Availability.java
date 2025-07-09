@@ -11,6 +11,9 @@ import lombok.*;
 @Data
 @Table(name = "available")
 public class Availability {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
   
     @Enumerated(EnumType.STRING)
     private DayOfWeek dayOfWeek;

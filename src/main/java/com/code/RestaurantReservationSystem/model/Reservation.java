@@ -11,7 +11,8 @@ import lombok.*;
 @Data
 @Table(name = "reservations")
 public class Reservation {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true)

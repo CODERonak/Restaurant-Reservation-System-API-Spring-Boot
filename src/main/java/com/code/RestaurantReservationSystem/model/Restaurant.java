@@ -9,9 +9,9 @@ import lombok.*;
 @Data
 @Table(name = "restaurants")
 public class Restaurant {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(nullable = false)
     private String name;
 
