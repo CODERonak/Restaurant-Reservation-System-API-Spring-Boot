@@ -7,6 +7,13 @@ import com.code.RestaurantReservationSystem.enums.Enums.ReservationStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
+/*
+ * This model represents a reservation in the system
+ * It is used to store reservation information in the database
+ * The table is named "reservations"
+ * With details like reservation code, reservation time, duration, party size, status, customer, restaurant, table, special requests, created at, and updated at
+ */
+
 @Entity
 @Data
 @Table(name = "reservations")

@@ -5,6 +5,13 @@ import com.code.RestaurantReservationSystem.enums.Enums.TableStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
+/*
+ * This model represents a table in the system
+ * It is used to store table information in the database
+ * The table is named "tables"
+ * With details like table number, capacity, status, and restaurant
+ */
+
 @Entity
 @Data
 @Table(name = "tables")
