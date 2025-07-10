@@ -1,26 +1,34 @@
 package com.code.RestaurantReservationSystem.service;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
-
+import com.code.RestaurantReservationSystem.dto.Auth.LoginRequest;
 import com.code.RestaurantReservationSystem.dto.Auth.RegisterRequest;
+import com.code.RestaurantReservationSystem.jwt.JWTUtil;
 import com.code.RestaurantReservationSystem.model.Users;
 import com.code.RestaurantReservationSystem.repository.UserRepository;
 
-// This class is used to register a new user
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
 @Service
 public class AuthService {
+
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final JWTUtil jwtUtil;
+    private final AuthenticationManager authenticationManager;
 
-    public AuthService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+    public AuthService(UserRepository userRepository,
+            BCryptPasswordEncoder passwordEncoder,
+            JWTUtil jwtUtil,
+            AuthenticationManager authenticationManager) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
+        this.authenticationManager = authenticationManager;
     }
-
-    // This method is used to register a new user
-    // It takes a RegisterRequest object as a parameter and saves the user to the database
-    // If the username or email already exists, it throws a RuntimeException
 
     public void registerUser(RegisterRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
@@ -28,11 +36,9 @@ public class AuthService {
         }
 
         if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("email already exists");
+            throw new RuntimeException("Email already exists");
         }
 
-        // If the username and email do not exist, the user is saved to the database
-        // The password is encoded using the BCryptPasswordEncoder
         Users user = new Users();
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
@@ -43,5 +49,13 @@ public class AuthService {
         user.setRole(request.getRole());
 
         userRepository.save(user);
+    }
+
+    public String loginUser(LoginRequest request) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+        String username = authentication.getName();
+
+        return jwtUtil.generateToken(username);
     }
 }

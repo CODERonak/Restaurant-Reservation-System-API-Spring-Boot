@@ -12,23 +12,19 @@ import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
-// This class is used to generate and validate JWT tokens
-
 @Component
 public class JWTUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(JWTUtil.class);
 
-    // These fields are used to generate and validate JWT tokens
     @Value("${jwt.secret}")
     private String jwtSecret;
 
-    @Value("${jwt.expiration}") // in milliseconds
-    private long jwtExpirationMs;
+    @Value("${jwt.expiration}")
+    private int jwtExpirationMs;
 
     private SecretKey key;
 
-    // This method is used to initialize the JWT secret key
     @PostConstruct
     public void init() {
         if (jwtSecret.length() < 32) {
@@ -37,7 +33,7 @@ public class JWTUtil {
         this.key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
     }
 
-    // This generates the token
+    // Generate JWT token
     public String generateToken(String username) {
         return Jwts.builder()
                 .subject(username)
@@ -47,7 +43,7 @@ public class JWTUtil {
                 .compact();
     }
 
-    // This method is used to get the username from the token
+    // Get username from JWT token
     public String getUsernameFromToken(String token) {
         return Jwts.parser()
                 .verifyWith(key)
@@ -57,7 +53,7 @@ public class JWTUtil {
                 .getSubject();
     }
 
-    // This method is used to validate the token
+    // Validate JWT token
     public boolean validateJwtToken(String token) {
         try {
             Jwts.parser()
@@ -65,8 +61,8 @@ public class JWTUtil {
                 .build()
                 .parseSignedClaims(token);
             return true;
-        } catch (JwtException | IllegalArgumentException e) {
-            logger.error("Invalid JWT token: {}", e.getMessage());
+        } catch (JwtException e) {
+            logger.error("JWT validation failed: {}", e.getMessage());
         }
         return false;
     }

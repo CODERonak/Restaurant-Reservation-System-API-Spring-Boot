@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.code.RestaurantReservationSystem.dto.Auth.LoginRequest;
 import com.code.RestaurantReservationSystem.dto.Auth.RegisterRequest;
 import com.code.RestaurantReservationSystem.service.AuthService;
 
@@ -23,5 +24,11 @@ public class AuthController {
     public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
         authService.registerUser(request);
         return new ResponseEntity<>("User registered successfully", HttpStatus.CREATED);
+    }
+
+    @PostMapping("login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+        String token = authService.loginUser(request);
+        return new ResponseEntity<>(token, HttpStatus.OK);
     }
 }
