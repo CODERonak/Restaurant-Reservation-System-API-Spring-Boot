@@ -1,8 +1,4 @@
-Here's a comprehensive `README.md` for your Restaurant Reservation System API, ready for your GitHub repository\!
-
 -----
-
-
 
 # 🍽️ Restaurant Reservation System API
 
@@ -73,10 +69,10 @@ The API uses **JWT (JSON Web Tokens)** for stateless authentication.
 
 ### Public Endpoints
 
-  * `POST /api/auth/register`
-  * `POST /api/auth/login`
-  * `GET /api/search/restaurants`
-  * `GET /api/restaurants/{id}/available-slots`
+  * `POST /auth/register`
+  * `POST /auth/login`
+  * `GET /search/restaurants`
+  * `GET /restaurants/{id}/available-slots`
 
 ### Protected Endpoints
 
@@ -88,40 +84,31 @@ Here's a summary of the main API endpoints. Refer to the codebase for detailed r
 
 ### Authentication
 
-  * `POST /api/auth/register` - Register a new user.
-  * `POST /api/auth/login` - Authenticate user and receive JWT.
+  * `POST /auth/register` - Register a new user.
+  * `POST /auth/login` - Authenticate user and receive JWT.
 
 ### Restaurant Management (STAFF, ADMIN)
 
-  * `POST /api/restaurants` - Create a new restaurant.
-  * `PUT /api/restaurants/{id}` - Update an existing restaurant.
-  * `GET /api/restaurants/my` - Get restaurants owned by the authenticated user (staff/admin).
+  * `POST /restaurants` - Create a new restaurant.
+  * `PUT /restaurants/{id}` - Update an existing restaurant.
+  * `GET /restaurants/my` - Get restaurants owned by the authenticated user (staff/admin).
 
 ### Table Management (STAFF, ADMIN)
 
-  * `POST /api/restaurants/{restaurantId}/tables` - Add a table to a specific restaurant.
-  * `PUT /api/tables/{tableId}` - Update a table.
-  * `PUT /api/tables/{tableId}/block` - Block/unblock a table.
+  * `POST /restaurants/{restaurantId}/tables` - Add a table to a specific restaurant.
+  * `PUT /tables/{tableId}` - Update a table.
+  * `PUT /tables/{tableId}/block` - Block/unblock a table.
 
 ### Availability Management (STAFF, ADMIN)
 
-  * `POST /api/restaurants/{restaurantId}/availability` - Set daily availability for a restaurant.
-  * `PUT /api/availability/{availabilityId}` - Update existing availability.
+  * `POST /restaurants/{restaurantId}/availability` - Set daily availability for a restaurant.
+  * `PUT /availability/{availabilityId}` - Update existing availability.
 
 ### Reservation Management
 
-  * `POST /api/reservations` (CUSTOMER) - Create a new reservation.
-  * `PUT /api/reservations/{id}` (CUSTOMER) - Update an existing reservation.
-  * `DELETE /api/reservations/{id}` (CUSTOMER) - Cancel a reservation.
-  * `GET /api/reservations/my` (CUSTOMER) - Get current user's reservations.
-  * `GET /api/restaurants/{id}/reservations` (STAFF) - Get all reservations for a specific restaurant.
-  * `PUT /api/reservations/{id}/status` (STAFF) - Update reservation status (e.g., CONFIRMED, CANCELED, COMPLETED).
-
-### Search & Public Access
-
-  * `GET /api/search/restaurants` - Search restaurants by various criteria (e.g., name, cuisine).
-  * `GET /api/restaurants/{id}/available-slots` - Get available reservation slots for a given restaurant.
-
-```
-
------
+  * `POST /reservations` (CUSTOMER) - Create a new reservation.
+  * `PUT /reservations/{id}` (CUSTOMER) - Update an existing reservation.
+  * `DELETE /reservations/{id}` (CUSTOMER) - Cancel a reservation.
+  * `GET /reservations/my` (CUSTOMER) - Get current user's reservations.
+  * `GET /restaurants/{id}/reservations` (STAFF) - Get all reservations for a specific restaurant.
+  * `PUT/reservations/{id}/status` (STAFF) - Update reservation status (e.g., CONFIRMED, CANCELED, COMPLETED).
