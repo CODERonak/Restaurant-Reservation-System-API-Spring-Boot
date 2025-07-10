@@ -5,6 +5,7 @@ import com.code.RestaurantReservationSystem.enums.Enums.UserRole;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+// This class represents a request to register a new user
 @Data
 public class RegisterRequest {
 
@@ -12,6 +13,7 @@ public class RegisterRequest {
     private String firstName;
     private String lastName;
 
+    // These fields are required and cannot be null
     @NotBlank
     private String username;
 

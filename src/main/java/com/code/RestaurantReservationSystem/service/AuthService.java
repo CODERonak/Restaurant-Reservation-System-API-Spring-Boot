@@ -7,6 +7,7 @@ import com.code.RestaurantReservationSystem.dto.Auth.RegisterRequest;
 import com.code.RestaurantReservationSystem.model.Users;
 import com.code.RestaurantReservationSystem.repository.UserRepository;
 
+// This class is used to register a new user
 @Service
 public class AuthService {
     private final UserRepository userRepository;
@@ -17,6 +18,10 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    // This method is used to register a new user
+    // It takes a RegisterRequest object as a parameter and saves the user to the database
+    // If the username or email already exists, it throws a RuntimeException
+
     public void registerUser(RegisterRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new RuntimeException("Username already exists");
@@ -26,6 +31,8 @@ public class AuthService {
             throw new RuntimeException("email already exists");
         }
 
+        // If the username and email do not exist, the user is saved to the database
+        // The password is encoded using the BCryptPasswordEncoder
         Users user = new Users();
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));

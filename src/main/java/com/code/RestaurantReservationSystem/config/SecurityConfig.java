@@ -13,16 +13,20 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.code.RestaurantReservationSystem.service.CustomUserDetailsService;
 
+// This class is used to configure the security of the application
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        // This is used to authorize requests
         http.authorizeHttpRequests(requests -> requests
                 .requestMatchers("/auth/**", "/test").permitAll()
                 .anyRequest().authenticated())
 
+                // This is used to enable basic authentication
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(form -> form.disable())
                 .authenticationManager(authenticationManager())
@@ -37,6 +41,7 @@ public class SecurityConfig {
         this.userDetailsService = userDetailsService;
     }
 
+    // This is used to authenticate users
     @Bean
     public AuthenticationManager authenticationManager() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(userDetailsService);

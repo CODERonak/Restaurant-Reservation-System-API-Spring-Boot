@@ -8,12 +8,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.code.RestaurantReservationSystem.model.Users;
 
+// This class is used to load user details from the database
+
 public class CustomUserDetails implements UserDetails {
     private final Users user;
 
     public CustomUserDetails(Users user) {
         this.user = user;
     }
+
+    // These methods are used to load user details from the database
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.code.RestaurantReservationSystem.model.Users;
 import com.code.RestaurantReservationSystem.repository.UserRepository;
 
+// This class is used to load user details from the database
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
@@ -15,6 +16,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     public CustomUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
+    // This method is used to load user details from the database
+    // It takes the username as a parameter and returns a UserDetails object
+    // If the user is not found, it throws a UsernameNotFoundException
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
