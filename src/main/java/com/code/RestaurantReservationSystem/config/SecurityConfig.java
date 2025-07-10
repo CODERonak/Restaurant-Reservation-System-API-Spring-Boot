@@ -10,7 +10,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.code.RestaurantReservationSystem.jwt.JWTEntryPoint;
+import com.code.RestaurantReservationSystem.jwt.JWTFilter;
+import com.code.RestaurantReservationSystem.jwt.JWTUtil;
 import com.code.RestaurantReservationSystem.service.CustomUserDetailsService;
 
 // This class is used to configure the security of the application
@@ -30,15 +34,26 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(form -> form.disable())
                 .authenticationManager(authenticationManager())
-                .csrf(csrf -> csrf.disable());
+                .csrf(csrf -> csrf.disable())
+                .addFilterAt(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(exceptionHandling -> exceptionHandling.authenticationEntryPoint(jwtEntryPoint));
 
         return http.build();
     }
 
     private final CustomUserDetailsService userDetailsService;
+    private final JWTEntryPoint jwtEntryPoint;
+    private final JWTUtil jwtUtil;
 
-    public SecurityConfig(CustomUserDetailsService userDetailsService) {
+    public SecurityConfig(CustomUserDetailsService userDetailsService, JWTEntryPoint jwtEntryPoint, JWTUtil jwtUtil) {
         this.userDetailsService = userDetailsService;
+        this.jwtEntryPoint = jwtEntryPoint;
+        this.jwtUtil = jwtUtil;
+    }
+
+    @Bean
+    public JWTFilter authenticationJwtTokenFilter() {
+        return new JWTFilter(jwtUtil, userDetailsService);
     }
 
     // This is used to authenticate users
