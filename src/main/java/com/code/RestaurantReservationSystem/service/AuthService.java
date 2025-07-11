@@ -2,6 +2,7 @@ package com.code.RestaurantReservationSystem.service;
 
 import com.code.RestaurantReservationSystem.dto.Auth.LoginRequest;
 import com.code.RestaurantReservationSystem.dto.Auth.RegisterRequest;
+import com.code.RestaurantReservationSystem.exceptions.custom.authentication.EmailOrUsernameAlreadyExistsException;
 import com.code.RestaurantReservationSystem.jwt.JWTUtil;
 import com.code.RestaurantReservationSystem.model.Users;
 import com.code.RestaurantReservationSystem.repository.UserRepository;
@@ -31,12 +32,9 @@ public class AuthService {
     }
 
     public void registerUser(RegisterRequest request) {
-        if (userRepository.existsByUsername(request.getUsername())) {
-            throw new RuntimeException("Username already exists");
-        }
-
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already exists");
+        if (userRepository.existsByUsername(request.getUsername())
+                || userRepository.existsByEmail(request.getEmail())) {
+            throw new EmailOrUsernameAlreadyExistsException("Email and Username Already exists!");
         }
 
         Users user = new Users();
