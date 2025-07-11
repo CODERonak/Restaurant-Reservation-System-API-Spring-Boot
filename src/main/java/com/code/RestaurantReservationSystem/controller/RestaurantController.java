@@ -1,10 +1,13 @@
 package com.code.RestaurantReservationSystem.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.code.RestaurantReservationSystem.dto.Restaurant.RestuarantRequestDTO;
+import com.code.RestaurantReservationSystem.model.Restaurant;
 import com.code.RestaurantReservationSystem.service.RestaurantService;
 
 @RestController
@@ -28,4 +31,10 @@ public class RestaurantController {
         restaurantService.updateRestaurantDetails(restaurantId, request);
         return new ResponseEntity<>("Restaurant updated successfully", HttpStatus.OK);
     }
+
+    @GetMapping
+    public ResponseEntity<List<Restaurant>> getAllRestaurants() {
+        return new ResponseEntity<>(restaurantService.getAllRestaurants(), HttpStatus.OK);
+    }
+
 }

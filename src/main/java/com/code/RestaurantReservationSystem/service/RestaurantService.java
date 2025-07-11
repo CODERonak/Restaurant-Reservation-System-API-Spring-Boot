@@ -1,5 +1,7 @@
 package com.code.RestaurantReservationSystem.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.code.RestaurantReservationSystem.dto.Restaurant.RestuarantRequestDTO;
@@ -41,5 +43,10 @@ public class RestaurantService {
 
         restaurantRepository.save(existingRestaurant);
     }
+
+    public List<Restaurant> getAllRestaurants() {
+        return restaurantRepository.findAll();
+    }
+
 
 }
