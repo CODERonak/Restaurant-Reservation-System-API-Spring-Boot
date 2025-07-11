@@ -27,7 +27,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         // This is used to authorize requests
         http.authorizeHttpRequests(requests -> requests
-                .requestMatchers("/auth/**", "/test").permitAll()
+                .requestMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated())
 
                 // This is used to enable basic authentication
