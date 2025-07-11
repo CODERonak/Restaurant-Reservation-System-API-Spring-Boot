@@ -7,7 +7,7 @@ import lombok.Data;
 
 // This class represents a request to register a new user
 @Data
-public class RegisterRequest {
+public class RegisterRequestDTO {
 
     // These fields are optional and can be null
     private String firstName;

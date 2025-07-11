@@ -1,7 +1,6 @@
 package com.code.RestaurantReservationSystem.service;
 
-import com.code.RestaurantReservationSystem.dto.Auth.LoginRequest;
-import com.code.RestaurantReservationSystem.dto.Auth.RegisterRequest;
+import com.code.RestaurantReservationSystem.dto.Auth.*;
 import com.code.RestaurantReservationSystem.exceptions.custom.authentication.*;
 import com.code.RestaurantReservationSystem.jwt.JWTUtil;
 import com.code.RestaurantReservationSystem.model.Users;
@@ -31,7 +30,7 @@ public class AuthService {
         this.authenticationManager = authenticationManager;
     }
 
-    public void registerUser(RegisterRequest request) {
+    public void registerUser(RegisterRequestDTO request) {
         if (userRepository.existsByUsername(request.getUsername())
                 || userRepository.existsByEmail(request.getEmail())) {
             throw new EmailOrUsernameAlreadyExistsException("Email or Username Already exists!");
@@ -49,7 +48,7 @@ public class AuthService {
         userRepository.save(user);
     }
 
-    public String loginUser(LoginRequest request) {
+    public String loginUser(LoginRequestDTO request) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));

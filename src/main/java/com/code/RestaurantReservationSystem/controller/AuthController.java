@@ -4,8 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.code.RestaurantReservationSystem.dto.Auth.LoginRequest;
-import com.code.RestaurantReservationSystem.dto.Auth.RegisterRequest;
+import com.code.RestaurantReservationSystem.dto.Auth.*;
 import com.code.RestaurantReservationSystem.service.AuthService;
 
 // This class is used to for Authentication
@@ -21,13 +20,13 @@ public class AuthController {
 
     // It sends a post request to the server to register a new user
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<String> register(@RequestBody RegisterRequestDTO request) {
         authService.registerUser(request);
         return new ResponseEntity<>("User registered successfully", HttpStatus.CREATED);
     }
 
     @PostMapping("login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<String> login(@RequestBody LoginRequestDTO request) {
         String token = authService.loginUser(request);
         return new ResponseEntity<>(token, HttpStatus.OK);
     }
