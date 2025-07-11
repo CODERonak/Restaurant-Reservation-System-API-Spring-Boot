@@ -2,7 +2,7 @@ package com.code.RestaurantReservationSystem.service;
 
 import com.code.RestaurantReservationSystem.dto.Auth.LoginRequest;
 import com.code.RestaurantReservationSystem.dto.Auth.RegisterRequest;
-import com.code.RestaurantReservationSystem.exceptions.custom.authentication.EmailOrUsernameAlreadyExistsException;
+import com.code.RestaurantReservationSystem.exceptions.custom.authentication.*;
 import com.code.RestaurantReservationSystem.jwt.JWTUtil;
 import com.code.RestaurantReservationSystem.model.Users;
 import com.code.RestaurantReservationSystem.repository.UserRepository;
@@ -34,7 +34,7 @@ public class AuthService {
     public void registerUser(RegisterRequest request) {
         if (userRepository.existsByUsername(request.getUsername())
                 || userRepository.existsByEmail(request.getEmail())) {
-            throw new EmailOrUsernameAlreadyExistsException("Email and Username Already exists!");
+            throw new EmailOrUsernameAlreadyExistsException("Email or Username Already exists!");
         }
 
         Users user = new Users();
@@ -50,10 +50,14 @@ public class AuthService {
     }
 
     public String loginUser(LoginRequest request) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        String username = authentication.getName();
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+            String username = authentication.getName();
 
-        return jwtUtil.generateToken(username);
+            return jwtUtil.generateToken(username);
+        } catch (Exception e) {
+            throw new InvalidCredentialsException("Invalid username or password");
+        }
     }
 }

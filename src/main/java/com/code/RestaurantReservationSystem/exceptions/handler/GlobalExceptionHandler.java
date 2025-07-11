@@ -2,7 +2,7 @@ package com.code.RestaurantReservationSystem.exceptions.handler;
 
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.code.RestaurantReservationSystem.exceptions.custom.authentication.EmailOrUsernameAlreadyExistsException;
+import com.code.RestaurantReservationSystem.exceptions.custom.authentication.*;
 import com.code.RestaurantReservationSystem.exceptions.payload.ErrorResponse;
 
 import org.springframework.http.*;
@@ -18,5 +18,15 @@ public class GlobalExceptionHandler {
                 HttpStatus.CONFLICT.getReasonPhrase(),
                 ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidCredentialsExceptions(
+        InvalidCredentialsException ex) {
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.UNAUTHORIZED.value(),
+                HttpStatus.UNAUTHORIZED.getReasonPhrase(),
+                ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 }
