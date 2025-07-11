@@ -21,4 +21,11 @@ public class RestaurantController {
         restaurantService.createRestaurant(request);
         return new ResponseEntity<>("Restaurant created successfully", HttpStatus.CREATED);
     }
+
+    @PutMapping("/update/{restaurantId}")
+    public ResponseEntity<String> updateRestaurant(@PathVariable Long restaurantId,
+            @RequestBody RestuarantRequestDTO request) {
+        restaurantService.updateRestaurantDetails(restaurantId, request);
+        return new ResponseEntity<>("Restaurant updated successfully", HttpStatus.OK);
+    }
 }

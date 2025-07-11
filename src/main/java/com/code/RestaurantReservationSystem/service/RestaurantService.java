@@ -26,4 +26,20 @@ public class RestaurantService {
 
         restaurantRepository.save(restaurant);
     }
+
+    public void updateRestaurantDetails(Long restaurantId, RestuarantRequestDTO request) {
+        Restaurant existingRestaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new RuntimeException("Restaurant not found with id: " + restaurantId));
+
+        existingRestaurant.setName(request.getName());
+        existingRestaurant.setAddress(request.getAddress());
+        existingRestaurant.setPhoneNumber(request.getPhoneNumber());
+        existingRestaurant.setEmail(request.getEmail());
+        existingRestaurant.setDescription(request.getDescription());
+        existingRestaurant.setOpeningTime(request.getOpeningTime());
+        existingRestaurant.setClosingTime(request.getClosingTime());
+
+        restaurantRepository.save(existingRestaurant);
+    }
+
 }
