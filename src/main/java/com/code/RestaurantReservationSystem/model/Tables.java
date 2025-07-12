@@ -29,7 +29,7 @@ public class Tables {
     @Enumerated(EnumType.STRING)
     private TableStatus status; // AVAILABLE, BLOCKED
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id")
     // This is the restaurant that the table belongs to
     private Restaurant restaurant;

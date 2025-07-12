@@ -41,7 +41,9 @@ public class TableService {
         tableRepository.save(existingTable);
     }
 
-    public List<Tables> getAllTables(Restaurant restaurant) {
-        return tableRepository.findByRestaurant(restaurant);
+    public List<Tables> getTablesByRestaurant(Long restaurantId) {
+        List<Tables> tables = tableRepository.findByRestaurantId(restaurantId);
+        tables.forEach(table -> table.getRestaurant().getId()); 
+        return tables;
     }
 }

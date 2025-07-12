@@ -8,7 +8,7 @@ import com.code.RestaurantReservationSystem.model.Restaurant;
 import java.util.List;
 
 public interface TableRepository extends JpaRepository<Tables, Long> {
-    List<Tables> findByRestaurant(Restaurant restaurant);
+    List<Tables> findByRestaurantId(long restaurantId);
 
     List<Tables> findByRestaurantAndCapacityGreaterThanEqual(Restaurant restaurant, int capacity);
 }
