@@ -25,10 +25,10 @@ public class Availability {
     @Enumerated(EnumType.STRING)
     private DayOfWeek dayOfWeek;
 
-    
     private LocalTime openingTime;
     private LocalTime closingTime;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 }
