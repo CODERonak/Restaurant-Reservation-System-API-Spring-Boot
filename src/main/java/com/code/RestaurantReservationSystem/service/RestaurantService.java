@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.code.RestaurantReservationSystem.dto.Restaurant.RestuarantRequestDTO;
+import com.code.RestaurantReservationSystem.exceptions.custom.restaurant.RestaurantAlreadyExistsException;
 import com.code.RestaurantReservationSystem.model.Restaurant;
 import com.code.RestaurantReservationSystem.repository.RestaurantRepository;
 
@@ -17,6 +18,11 @@ public class RestaurantService {
     }
 
     public void createRestaurant(RestuarantRequestDTO request) {
+
+        if (restaurantRepository.existsByEmail(request.getEmail())) {
+            throw new RestaurantAlreadyExistsException("Restaurant already exists");
+        }
+
         Restaurant restaurant = new Restaurant();
         restaurant.setName(request.getName());
         restaurant.setAddress(request.getAddress());
@@ -47,6 +53,4 @@ public class RestaurantService {
     public List<Restaurant> getAllRestaurants() {
         return restaurantRepository.findAll();
     }
-
-
 }
