@@ -28,7 +28,8 @@ public class SecurityConfig {
         // This is used to authorize requests
         http.authorizeHttpRequests(requests -> requests
                 .requestMatchers("/auth/**", "/admin/restaurant/all").permitAll()
-                .requestMatchers("/admin/**", "/test").hasAnyAuthority("ROLE_ADMIN")
+                .requestMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
+                .requestMatchers("/tables/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_STAFF")
                 .anyRequest().authenticated())
 
                 // This is used to enable basic authentication
