@@ -11,7 +11,7 @@ import com.code.RestaurantReservationSystem.model.Restaurant;
 import com.code.RestaurantReservationSystem.service.RestaurantService;
 
 @RestController
-@RequestMapping("/restaurant")
+@RequestMapping("/admin/restaurant")
 public class RestaurantController {
     private final RestaurantService restaurantService;
 
@@ -32,7 +32,7 @@ public class RestaurantController {
         return new ResponseEntity<>("Restaurant updated successfully", HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Restaurant>> getAllRestaurants() {
         return new ResponseEntity<>(restaurantService.getAllRestaurants(), HttpStatus.OK);
     }

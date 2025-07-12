@@ -27,8 +27,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         // This is used to authorize requests
         http.authorizeHttpRequests(requests -> requests
-                .requestMatchers("/auth/**", "/restaurant").permitAll()
-                .requestMatchers("/restaurant/**").hasAnyAuthority("ADMIN")
+                .requestMatchers("/auth/**", "/admin/restaurant/all").permitAll()
+                .requestMatchers("/admin/**", "/test").hasAnyAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated())
 
                 // This is used to enable basic authentication
@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .formLogin(form -> form.disable())
                 .authenticationManager(authenticationManager())
                 .csrf(csrf -> csrf.disable())
-                .addFilterAt(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(exceptionHandling -> exceptionHandling.authenticationEntryPoint(jwtEntryPoint));
 
         return http.build();
