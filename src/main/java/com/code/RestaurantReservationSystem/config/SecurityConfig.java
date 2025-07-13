@@ -29,7 +29,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(requests -> requests
                 .requestMatchers("/auth/**", "/admin/restaurant/all").permitAll()
                 .requestMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
-                .requestMatchers("/tables/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_STAFF")
+                .requestMatchers("/tables/**", "/availability/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_STAFF")
                 .anyRequest().authenticated())
 
                 // This is used to enable basic authentication
