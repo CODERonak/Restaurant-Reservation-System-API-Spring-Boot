@@ -28,4 +28,13 @@ public class AvailabilityService {
         availabilityRepository.save(newAvailability);
     }
 
+    public void updateAvailability(AvailabilityDTO availability, Long availabilityId) {
+        Availability existingAvailability = availabilityRepository.findById(availabilityId)
+                .orElseThrow(() -> new IllegalArgumentException("Availability not found with id: " + availabilityId));
+
+        existingAvailability.setOpeningTime(availability.getOpeningTime());
+        existingAvailability.setClosingTime(availability.getClosingTime());
+        availabilityRepository.save(existingAvailability);
+    }
+
 }
