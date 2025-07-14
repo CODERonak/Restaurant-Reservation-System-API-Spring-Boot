@@ -8,6 +8,7 @@ import com.code.RestaurantReservationSystem.enums.Enums.ReservationStatus;
 
 import lombok.Data;
 
+// created the DTO for the reservation response can be sent to the client
 @Data
 public class ReservationResponseDTO {
     private Long id;

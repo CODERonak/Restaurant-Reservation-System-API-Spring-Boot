@@ -37,6 +37,7 @@ public class ReservationService {
         Tables table = tableRepository.findById(request.getTableId())
                 .orElseThrow(() -> new RuntimeException("Table not found"));
 
+        // Create a new reservation object and save it to the database
         Reservation reservation = new Reservation();
         reservation.setCustomer(customer);
         reservation.setRestaurant(restaurant);
@@ -53,16 +54,19 @@ public class ReservationService {
         reservationRepository.save(reservation);
     }
 
+    // This method is used to update the reservation status
     public void updateReservationStatus(Long reservationId, ReservationStatus status) {
         Reservation reservation = reservationRepository.findById(reservationId)
                 .orElseThrow(() -> new RuntimeException("Reservation not found"));
 
+        // Update the reservation status and save it to the database
         reservation.setStatus(status);
         reservation.setUpdatedAt(LocalDateTime.now());
 
         reservationRepository.save(reservation);
     }
 
+    // gives user a reservation code which is unique
     public String getReservationCode() {
         return "RES-" + System.currentTimeMillis();
     }
