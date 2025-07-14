@@ -58,7 +58,8 @@ src/
     │       ├── dto/             // Data Transfer Objects for request/response payloads
     │       ├── config/          // Security and application-specific configurations
     │       ├── exception/       // Custom and global exception handlers
-    │       └── enums/           // Enumerations for user roles, reservation statuses, etc.
+    │       ├──enums/           // Enumerations for user roles, reservation statuses, etc.
+            ├── jwt/       // jwt package to handle jwt token
     └── resources/
         └── application.properties (or .yml) // Application configurations
 ```
@@ -71,7 +72,7 @@ The API uses **JWT (JSON Web Tokens)** for stateless authentication.
 
   * `POST /auth/register`
   * `POST /auth/login`
-  * `GET /search/restaurants`
+  * `GET /admin/restaurant`
   * `GET /restaurants/{id}/available-slots`
 
 ### Protected Endpoints
@@ -95,14 +96,14 @@ Here's a summary of the main API endpoints. Refer to the codebase for detailed r
 
 ### Table Management (STAFF, ADMIN)
 
-  * `POST /restaurants/{restaurantId}/tables` - Add a table to a specific restaurant.
-  * `PUT /tables/{tableId}` - Update a table.
-  * `PUT /tables/{tableId}/block` - Block/unblock a table.
+  * `POST /tables/create` - Add a table to a specific restaurant.
+  * `PUT/tables/update/{tableId}` - Update a table.
+  * `GET /tables/getAll/{restaurantId}` - Block/unblock a table.
 
 ### Availability Management (STAFF, ADMIN)
 
-  * `POST /restaurants/{restaurantId}/availability` - Set daily availability for a restaurant.
-  * `PUT /availability/{availabilityId}` - Update existing availability.
+  * `POST /availability/add/{restaurantId}` - Set daily availability for a restaurant.
+  * `PUT /availability/getAll/{restaurantId}` - Update existing availability.
 
 ### Reservation Management
 
