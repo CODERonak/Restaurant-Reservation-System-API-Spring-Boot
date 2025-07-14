@@ -1,6 +1,7 @@
 package com.code.RestaurantReservationSystem.dto.Reservation;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -9,12 +10,12 @@ import lombok.Data;
 @Data
 public class ReservationRequestDTO {
     @NotNull
-    private LocalDateTime reservationTime;
+    private LocalTime reservationTime;
 
-    private Integer durationMinutes;
+    private LocalDate reservationdDate;
 
     @NotNull
-    private Integer partySize;
+    private Integer numberOfPeople;
 
     @NotNull
     private Long customerId;

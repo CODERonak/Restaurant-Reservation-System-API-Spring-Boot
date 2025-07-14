@@ -1,6 +1,8 @@
 package com.code.RestaurantReservationSystem.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import com.code.RestaurantReservationSystem.enums.Enums.ReservationStatus;
 
@@ -26,10 +28,10 @@ public class Reservation {
     private String reservationCode;
 
     @Column(nullable = false)
-    private LocalDateTime reservationTime;
+    private LocalTime reservationTime;
 
-    private Integer durationMinutes;
-    private Integer partySize;
+    private LocalDate reservationDate;
+    private Integer numberOfPeople;
 
     @Enumerated(EnumType.STRING)
     private ReservationStatus status; // PENDING, CONFIRMED, CANCELLED
