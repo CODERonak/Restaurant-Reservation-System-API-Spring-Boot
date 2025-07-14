@@ -12,7 +12,7 @@ public class ReservationRequestDTO {
     @NotNull
     private LocalTime reservationTime;
 
-    private LocalDate reservationdDate;
+    private LocalDate reservationDate;
 
     @NotNull
     private Integer numberOfPeople;
