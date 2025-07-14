@@ -35,13 +35,18 @@ public class Reservation {
     private ReservationStatus status; // PENDING, CONFIRMED, CANCELLED
 
     @ManyToOne
+    @JoinColumn(name = "customer_id")
     private Users customer;
 
     @ManyToOne
+    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     @ManyToOne
+    @JoinColumn(name = "table_id")
     private Tables table;
+
+    // if any specific request to be added
     private String specialRequests;
 
     private LocalDateTime createdAt;
