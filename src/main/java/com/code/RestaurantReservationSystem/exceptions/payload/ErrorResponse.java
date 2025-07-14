@@ -2,7 +2,7 @@ package com.code.RestaurantReservationSystem.exceptions.payload;
 
 import lombok.Data;
 
-// This class is used to handle error response
+// This class is used to handle the error responses
 @Data
 public class ErrorResponse {
     private int status;

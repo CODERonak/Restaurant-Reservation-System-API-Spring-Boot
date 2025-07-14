@@ -25,6 +25,7 @@ public class JWTUtil {
 
     private SecretKey key;
 
+    // Initialize key
     @PostConstruct
     public void init() {
         if (jwtSecret.length() < 32) {

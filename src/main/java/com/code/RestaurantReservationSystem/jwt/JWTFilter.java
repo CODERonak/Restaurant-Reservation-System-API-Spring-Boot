@@ -18,6 +18,7 @@ import java.io.IOException;
 @Component
 public class JWTFilter extends OncePerRequestFilter {
 
+    // creating the fields and constructor
     private JWTUtil jwtUtils;
     private CustomUserDetailsService userDetailsService;
 
@@ -26,6 +27,7 @@ public class JWTFilter extends OncePerRequestFilter {
         this.userDetailsService = userDetailsService;
     }
 
+    // this method is used to filter the requests
     @Override
     protected void doFilterInternal(
             HttpServletRequest request,
@@ -49,6 +51,7 @@ public class JWTFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+    // this method is used to parse the jwt token
     private String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");
         if (headerAuth != null && headerAuth.startsWith("Bearer ")) {

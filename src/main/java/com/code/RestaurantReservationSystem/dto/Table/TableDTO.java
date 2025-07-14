@@ -5,6 +5,7 @@ import com.code.RestaurantReservationSystem.enums.Enums.TableStatus;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+// created the DTO for the table request can be sent to the server with validations
 @Data
 public class TableDTO {
     private long id;

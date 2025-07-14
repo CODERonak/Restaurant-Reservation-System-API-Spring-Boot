@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.code.RestaurantReservationSystem.model.Users;
 
 // This class is used to load user details from the database
-
 public class CustomUserDetails implements UserDetails {
     private final Users user;
 
@@ -19,8 +18,7 @@ public class CustomUserDetails implements UserDetails {
         this.user = user;
     }
 
-    // These methods are used to load user details from the database
-
+    // this method lists the roles present in the userRole enum and adds them to the authorities list with ROLE_ 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
@@ -28,11 +26,13 @@ public class CustomUserDetails implements UserDetails {
         return authorities;
     }
 
+    // this method returns the user's password
     @Override
     public String getPassword() {
         return user.getPassword();
     }
 
+    // this method returns the user's username
     @Override
     public String getUsername() {
         return user.getUsername();

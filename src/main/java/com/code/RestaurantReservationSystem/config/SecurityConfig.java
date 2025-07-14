@@ -18,7 +18,6 @@ import com.code.RestaurantReservationSystem.jwt.JWTUtil;
 import com.code.RestaurantReservationSystem.service.CustomUserDetailsService;
 
 // This class is used to configure the security of the application
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -43,16 +42,19 @@ public class SecurityConfig {
         return http.build();
     }
 
+    // creating the fields for the class
     private final CustomUserDetailsService userDetailsService;
     private final JWTEntryPoint jwtEntryPoint;
     private final JWTUtil jwtUtil;
 
+    // creating the constructor for the class
     public SecurityConfig(CustomUserDetailsService userDetailsService, JWTEntryPoint jwtEntryPoint, JWTUtil jwtUtil) {
         this.userDetailsService = userDetailsService;
         this.jwtEntryPoint = jwtEntryPoint;
         this.jwtUtil = jwtUtil;
     }
 
+    // This function is used to filter the requests
     @Bean
     public JWTFilter authenticationJwtTokenFilter() {
         return new JWTFilter(jwtUtil, userDetailsService);
@@ -67,6 +69,7 @@ public class SecurityConfig {
         return new ProviderManager(authenticationProvider);
     }
 
+    // this function helps to return a password in Bcrypt enecoded form
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

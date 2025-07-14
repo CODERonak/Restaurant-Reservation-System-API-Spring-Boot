@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import com.code.RestaurantReservationSystem.dto.Table.AvailabilityDTO;
 import com.code.RestaurantReservationSystem.service.AvailabilityService;
 
+// this class is used set and update the availability
 @RestController
 @RequestMapping("/availability")
 public class AvailabilityController {
@@ -21,6 +22,7 @@ public class AvailabilityController {
         this.availabilityService = availabilityService;
     }
 
+    // this method is used to create the availability status for the restaurant  
     @PostMapping("/add/{restaurantId}")
     public ResponseEntity<String> createAvailability(@RequestBody AvailabilityDTO available,
             @PathVariable Long restaurantId) {
@@ -28,6 +30,7 @@ public class AvailabilityController {
         return new ResponseEntity<>("Availability created successfully", HttpStatus.CREATED);
     }
 
+    // this method is used to update the availability status for the restaurant
     @PutMapping("/update/{availabilityId}")
     public ResponseEntity<String> updateAvailability(@RequestBody AvailabilityDTO available,
             @PathVariable Long availabilityId) {

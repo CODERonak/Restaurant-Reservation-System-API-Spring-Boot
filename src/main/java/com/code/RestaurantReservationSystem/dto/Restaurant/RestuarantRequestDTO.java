@@ -5,8 +5,10 @@ import java.time.LocalTime;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+// created the DTO for the restaurant request can be sent to the server 
 @Data
 public class RestuarantRequestDTO {
+    // created the fields for the DTO with validations
     @NotBlank
     private String name;
 

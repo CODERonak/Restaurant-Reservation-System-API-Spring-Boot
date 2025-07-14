@@ -12,8 +12,10 @@ import com.code.RestaurantReservationSystem.service.AuthService;
 @RequestMapping("/auth")
 public class AuthController {
 
+    // defining the auth service
     private final AuthService authService;
 
+    // implementing the constructor injection
     public AuthController(AuthService authService) {
         this.authService = authService;
     }
@@ -25,6 +27,7 @@ public class AuthController {
         return new ResponseEntity<>("User registered successfully", HttpStatus.CREATED);
     }
 
+    // this method sends a post request to the server to login a user which if successfull returns the token
     @PostMapping("login")
     public ResponseEntity<String> login(@RequestBody LoginRequestDTO request) {
         String token = authService.loginUser(request);

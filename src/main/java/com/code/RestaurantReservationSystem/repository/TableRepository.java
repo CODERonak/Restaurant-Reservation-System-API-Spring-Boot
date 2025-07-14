@@ -7,6 +7,7 @@ import com.code.RestaurantReservationSystem.model.Restaurant;
 
 import java.util.List;
 
+// This interface is used to define the methods for the table 
 public interface TableRepository extends JpaRepository<Tables, Long> {
     List<Tables> findByRestaurantId(long restaurantId);
 

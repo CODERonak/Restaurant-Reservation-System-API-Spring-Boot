@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+// This class is used to handle authentication exceptions
 @Component
 public class JWTEntryPoint implements AuthenticationEntryPoint {
     @Override
